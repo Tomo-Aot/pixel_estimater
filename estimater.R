@@ -15,12 +15,15 @@ data = tibble(
   dir = dir(path = path,
             full.names = TRUE)
 ) |> 
-  as.character()
-
+  mutate(
+    data = map(dir, image_read)
+  ) |> 
+  select(data) |> 
+  unlist(data)
 
 # define seaweed areas
 # test with a herbarium picture
-pic = image_read(data)
+pic = data$data1
 
 # extract pixel data
 pixels = as.data.frame(pic[[1]])
@@ -74,5 +77,6 @@ king |>
 king |> 
   filter(is_redbrown == TRUE) |> 
   nrow()
+
 
 
