@@ -48,6 +48,13 @@ pixels = pixels |>
 
 
 pixels |> 
+  mutate(
+    is_redbrown = 
+      (red >= 30 & red <= 170) &
+      (green >= 5 & green <= 90)  &
+      (blue >= 0 & blue <= 80)
+  ) |> 
+  mutate(colour = ifelse(is_redbrown == TRUE, "#ff0000", colour)) |> 
   ggplot() + 
   geom_raster(
     aes(x = x, y = y, fill = colour)
