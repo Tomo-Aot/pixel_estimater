@@ -28,8 +28,7 @@ path = "./raw_data"
 data = tibble(
   dir = dir(path = path,
             full.names = TRUE)
-) |>
-  select(dir) |>
+) |> 
   as.character()
 ```
 
