@@ -15,8 +15,6 @@ data = tibble(
   dir = dir(path = path,
             full.names = TRUE)
 ) |> 
-  mutate(data = map(dir, image_read)) |> 
-  select(dir) |> 
   as.character()
 
 
@@ -36,6 +34,17 @@ pixels = expand_grid(
 
 pixels = pixels |> 
   mutate(colour = as.vector(r))
+
+
+pixels = pixels |> 
+  mutate(
+    RGB = t(col2rgb(colour)),
+    red = RGB[, 1],
+    green = RGB[, 2],
+    blue = RGB[, 3]
+  ) |> 
+  select(x, y, colour, red, green, blue)
+
 
 
 pixels |> 
