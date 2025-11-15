@@ -20,6 +20,22 @@ library(showtext)
 # Preapare Image Files
 
 画像データが複数存在することを想定して、
-ここでは$tibble()$を使用してファイル名をリスト化します。
+ここではtibble()を使用してファイル名をリスト化します。
 
+```
+path = "./raw_data"
+
+data = tibble(
+  dir = dir(path = path,
+            full.names = TRUE)
+) |>
+  select(dir) |>
+  as.character()
+```
+
+
+読み込んだデータは縦方向と横方向のカラーコードを取得します。
+
+
+# 
 
